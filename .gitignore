@@ -5,6 +5,8 @@
 *.slo
 *.lo
 *.o
+./build/objects/*
+./build/exe/*
 *.obj
 
 # Precompiled Headers
