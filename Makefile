@@ -2,14 +2,21 @@ CXX = g++ -std=c++17 -c
 BUILD_OUTPUT = g++ -o
 OBJ = ./*.o
 SRC = src/*.cpp
-BUILD = ./build/objects
 EXE = ./build/exe
+DIR = ./build
+MKDIR = mkdir
 TARGET = schm 
-RM = rm -f
+RM = rm -rf
 
-.PHONY: all run clean
+.PHONY: all build exe run clean
 
-all: schm 
+all: build exe schm 
+
+build:
+	$(MKDIR) $(DIR)
+
+exe:
+	$(MKDIR) $(EXE)
 
 run: 
 	$(EXE)/$(TARGET)
@@ -23,5 +30,5 @@ $(OBJ): $(SRC)
 	$(CXX) $(SRC)
 
 clean:
-	$(RM) $(EXE)/* 
+	$(RM) $(DIR)
 	$(RM) *.o
