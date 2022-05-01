@@ -18,9 +18,6 @@ build:
 exe:
 	$(MKDIR) $(EXE)
 
-run: 
-	$(EXE)/$(TARGET)
-
 schm: $(OBJ)
 	$(BUILD_OUTPUT) $(EXE)/$(TARGET) $(OBJ)
 
