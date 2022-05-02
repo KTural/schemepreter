@@ -1,6 +1,7 @@
 CXX = g++ -std=c++17 -c
 BUILD_OUTPUT = g++ -o
 OBJ = ./*.o
+HEADER = ./include/*.hpp
 SRC = src/*.cpp
 EXE = ./build/exe
 DIR = ./build
@@ -21,7 +22,7 @@ exe:
 schm: $(OBJ)
 	$(BUILD_OUTPUT) $(EXE)/$(TARGET) $(OBJ)
 
-./*.o: ./include/*.hpp
+./*.o: $(HEADER)
 
 $(OBJ): $(SRC)
 	$(CXX) $(SRC)
