@@ -1,3 +1,7 @@
 FILE=./build/exe/schm
 
-make clean && make all && "$FILE"
+if test -f "$FILE"; then 
+    "$FILE"
+else 
+    echo "$FILE doesn't exist!"
+fi
