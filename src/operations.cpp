@@ -3,20 +3,19 @@
 #define TRUE "#t"
 #define FALSE "#f"
 
-std::string arg_error(std::vector<std::string> &expr) {
-    std::string temp;
+int arg_error(const std::vector<std::string> &expr, const std::string op) {
     if (expr.size() == 0) {
-        return "Wrong number of arguments for procedure +";
+        std ::cout << "Wrong number of arguments for procedure " << op << std::endl;
+        return 1;
     }
-    return temp;
+    return 0;
 }
 
-std::string invalid_logical_arg(std::vector<std::string> &expr) {
-    std::string temp;
+int invalid_logical_arg(const std::vector<std::string> &expr) {
     if (expr.size() == 1) {
-        return TRUE;
+        return 0;
     }
-    return temp;
+    return 1;
 }
 
 std::string print(std::vector<std::string> &expr) {
@@ -29,7 +28,10 @@ std::string print(std::vector<std::string> &expr) {
 }
 
 std::string add(std::vector<std::string> &expr) {
-    arg_error(expr);
+    std::string temp;
+    std::string op = "+";
+
+    if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
     double sum = strtod(expr[0].c_str(), NULL);
@@ -43,7 +45,10 @@ std::string add(std::vector<std::string> &expr) {
 }
 
 std::string subtract(std::vector<std::string> &expr) {
-    arg_error(expr);
+    std::string temp;
+    std::string op = "-";
+
+    if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
     double sum = strtod(expr[0].c_str(), NULL);
@@ -57,7 +62,10 @@ std::string subtract(std::vector<std::string> &expr) {
 }
 
 std::string divide(std::vector<std::string> &expr) {
-    arg_error(expr);
+    std::string temp;
+    std::string op = "/";
+
+    if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
     double sum = strtod(expr[0].c_str(), NULL);
@@ -71,7 +79,10 @@ std::string divide(std::vector<std::string> &expr) {
 }
 
 std::string multiply(std::vector<std::string> &expr) {
-    arg_error(expr);
+    std::string temp;
+    std::string op = "*";
+
+    if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
     double sum = strtod(expr[0].c_str(), NULL);
@@ -84,18 +95,25 @@ std::string multiply(std::vector<std::string> &expr) {
     return ss.str();
 }
 
-int check_logical_and(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) == strtod(expr[i + 1].c_str(), NULL))) {
+int check_logical_equal(std::vector<std::string> &expr, size_t &i) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val == second_val) && cur_val != 0) {
         return 1;
     }
     return 0;
 }
 
 std::string equal(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = "=";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
-        if (check_logical_and(expr, i) == 1) {
+        if (check_logical_equal(expr, i) == 1) {
             return FALSE;
         }
     }
@@ -104,14 +122,21 @@ std::string equal(std::vector<std::string> &expr) {
 }
 
 int check_logical_not_equal(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) != strtod(expr[i + 1].c_str(), NULL))) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val != second_val)) {
         return 1;
     }
     return 0;
 }
 
 std::string not_equal(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = "!=";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
         if (check_logical_not_equal(expr, i) == 1) {
@@ -122,14 +147,21 @@ std::string not_equal(std::vector<std::string> &expr) {
 }
 
 int check_logical_less_than(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) < strtod(expr[i + 1].c_str(), NULL))) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val < second_val)) {
         return 1;
     }
     return 0;
 }
 
 std::string less_than(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = "<";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
         if (check_logical_less_than(expr, i) == 1) {
@@ -139,15 +171,22 @@ std::string less_than(std::vector<std::string> &expr) {
     return TRUE;
 }
 
-int check_logical_less_than_or_equal(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) <= strtod(expr[i + 1].c_str(), NULL))) {
+int check_logical_less_than_or_equal(std::vector<std::string> &expr, const size_t &i) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val <= second_val)) {
         return 1;
     }
     return 0;
 }
 
 std::string less_than_or_equal(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = "<=";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
         if (check_logical_less_than_or_equal(expr, i) == 1) {
@@ -158,14 +197,21 @@ std::string less_than_or_equal(std::vector<std::string> &expr) {
 }
 
 int check_logical_greater_than(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) > strtod(expr[i + 1].c_str(), NULL))) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val > second_val)) {
         return 1;
     }
     return 0;
 }
 
 std::string greater_than(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = ">";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
         if (check_logical_greater_than(expr, i) == 1) {
@@ -176,14 +222,21 @@ std::string greater_than(std::vector<std::string> &expr) {
 }
 
 int check_logical_greater_than_or_equal(std::vector<std::string> &expr, size_t &i) {
-    if (!(strtod(expr[i].c_str(), NULL) >= strtod(expr[i + 1].c_str(), NULL))) {
+    auto cur_val = strtod(expr[i].c_str(), NULL);
+    auto second_val = strtod(expr[i + 1].c_str(), NULL);
+
+    if (!(cur_val >= second_val)) {
         return 1;
     }
     return 0;
 }
 
 std::string greater_than_or_equal(std::vector<std::string> &expr) {
-    invalid_logical_arg(expr);
+    std::string temp;
+    std::string op = ">=";
+
+    if (arg_error(expr, op) == 1) return temp;
+    if (invalid_logical_arg(expr) == 0) return TRUE;
 
     for (size_t i = 0; i < expr.size() - 1; i++) {
         if (check_logical_greater_than_or_equal(expr, i) == 1) {
@@ -193,7 +246,7 @@ std::string greater_than_or_equal(std::vector<std::string> &expr) {
     return TRUE;
 }
 
-std::string scheme_quit(std::vector<std::string>&vv) {
+std::string scheme_quit(std::vector<std::string> &expr) {
     std::string temp;
     exit(0);
 }
