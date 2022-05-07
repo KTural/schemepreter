@@ -8,19 +8,22 @@
 #include <vector>
 #include <map>
 
-class Object {
+extern bool ERROR_FLAG1;
+extern bool ERROR_FLAG2;
+
+class Op {
     public:
-        Object();
-        ~Object();
+        Op();
+        ~Op();
         std::string get_expr_type() const;
         std::string get_expr_value() const;
         Procedure get_proc() const;
         bool check_native_procedure() const;
         std::string apply(std::vector<std::string>& expr);
         std::string apply();
-        Object(std::string &val);
-        Object(std::string(*new_func) (std::vector<std::string>&));
-        Object(Procedure &proc_);
+        Op(std::string &val);
+        Op(std::string(*new_func) (std::vector<std::string>&));
+        Op(Procedure &proc_);
 
     private:
         std::string value;
