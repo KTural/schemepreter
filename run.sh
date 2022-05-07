@@ -1,3 +1,4 @@
+#!/bin/sh
 FILE=./build/exe/schm
 
 if test -f "$FILE"; then 
