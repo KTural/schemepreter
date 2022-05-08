@@ -47,6 +47,12 @@ std::string add(std::vector<std::string> &expr) {
     if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
+
+    if (number(expr[0]) == 0 || expr[0] == op) {
+        operand_error(expr[0]);
+        return temp;
+    }
+
     double sum = strtod(expr[0].c_str(), NULL);
 
     for (size_t i = 1; i < expr.size(); i++) {
@@ -70,6 +76,12 @@ std::string subtract(std::vector<std::string> &expr) {
     if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
+
+    if (number(expr[0]) == 0 || expr[0] == op) {
+        operand_error(expr[0]);
+        return temp;
+    }
+
     double sum = strtod(expr[0].c_str(), NULL);
 
     for (size_t i = 1; i < expr.size(); i++) {
@@ -93,6 +105,12 @@ std::string divide(std::vector<std::string> &expr) {
     if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
+
+    if (number(expr[0]) == 0 || expr[0] == op) {
+        operand_error(expr[0]);
+        return temp;
+    }
+
     double sum = strtod(expr[0].c_str(), NULL);
 
     if (expr.size() == 1) {
@@ -127,6 +145,12 @@ std::string multiply(std::vector<std::string> &expr) {
     if (arg_error(expr, op) == 1) return temp;
 
     std::stringstream ss;
+
+    if (number(expr[0]) == 0 || expr[0] == op) {
+        operand_error(expr[0]);
+        return temp;
+    }
+    
     double sum = strtod(expr[0].c_str(), NULL);
 
     for (size_t i = 1; i < expr.size(); i++) {

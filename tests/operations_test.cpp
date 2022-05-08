@@ -5,13 +5,13 @@ namespace {
     // Addition operation testing :
 
     TEST(OperationsTestAddition, AdditionSimple) {
-        std::vector<std::string> sample = {"+", "2", "3"};
+        std::vector<std::string> sample = {"2", "3"};
         auto expected = "5";
         EXPECT_EQ(expected, add(sample));
     }
 
     TEST(OperationsTestAddition, AdditionNested) {
-        std::vector<std::string> sample = {"+", "2", "2", "3", "2"};
+        std::vector<std::string> sample = {"2", "2", "3", "2"};
         auto expected = "9";
         EXPECT_EQ(expected, add(sample));
     }
@@ -22,14 +22,8 @@ namespace {
         EXPECT_EQ(expected, add(sample));
     }
 
-    TEST(OperationsTestAddition, AdditionPartialValues) {
-        std::vector<std::string> sample = {"+", "3" "+", "3"};
-        auto expected = "6";
-        EXPECT_EQ(expected, add(sample));
-    }
-
     TEST(OperationsTestAddition, AdditionDouble) {
-        std::vector<std::string> sample = {"+", "3.99", "4.891"};
+        std::vector<std::string> sample = {"3.99", "4.891"};
         auto expected = "8.881";
         EXPECT_EQ(expected, add(sample));
     }
@@ -37,6 +31,15 @@ namespace {
     TEST(OperationsTestAddition, AdditionInvalidOperand) {
         std::vector<std::string> sample = {"+", "10", "#t"};
         auto expected = "";
+        EXPECT_EQ(expected, add(sample));
+
+        sample = {"+", "#t", "10"};
+        EXPECT_EQ(expected, add(sample));
+
+        sample = {"+", "#f"};
+        EXPECT_EQ(expected, add(sample));
+
+        sample = {"+", "#t", "#f"};
         EXPECT_EQ(expected, add(sample));
     }
 
@@ -60,15 +63,9 @@ namespace {
         EXPECT_EQ(expected, subtract(sample));
     }
 
-    TEST(OperationsTestSubtraction, SubtractionPartialValues) {
-        std::vector<std::string> sample = {"-", "3" "-", "2"};
-        auto expected = "-5";
-        EXPECT_EQ(expected, subtract(sample));
-    }
-
     TEST(OperationsTestSubtraction, SubtractionDouble) {
-        std::vector<std::string> sample = {"-", "3.99", "4.891"};
-        auto expected = "-8.881";
+        std::vector<std::string> sample = {"3.99", "4.891"};
+        auto expected = "-0.901";
         EXPECT_EQ(expected, subtract(sample));
     }
 
@@ -76,6 +73,15 @@ namespace {
         std::vector<std::string> sample = {"-", "10", "-", "4", "#t"};
         auto expected = "";
         EXPECT_EQ(expected, subtract(sample));
+
+        sample = {"-", "10", "#t"};
+        EXPECT_EQ(expected, subtract(sample));
+
+        sample = {"-", "#t", "10"};
+        EXPECT_EQ(expected, subtract(sample));
+
+        sample = {"-", "#t", "#f"};
+        EXPECT_EQ(expected, subtract(sample));    
     }
 
     // Division operation testing :
@@ -108,6 +114,15 @@ namespace {
         std::vector<std::string> sample = {"/", "10", "/", "4", "#t"};
         auto expected = "";
         EXPECT_EQ(expected, divide(sample));
+
+        sample = {"/", "#t", "10"};
+        EXPECT_EQ(expected, divide(sample));
+
+        sample = {"/", "10", "#t"};
+        EXPECT_EQ(expected, divide(sample));
+
+        sample = {"/", "#t", "#f"};
+        EXPECT_EQ(expected, divide(sample));
     }
 
     // Multiplication operation testing :
@@ -139,6 +154,15 @@ namespace {
     TEST(OperationsTestMultiplication, MultiplicationInvalidOperand) {
         std::vector<std::string> sample = {"*", "10", "*", "4", "#t"};
         auto expected = "";
+        EXPECT_EQ(expected, multiply(sample));
+
+        sample = {"*", "10", "#t"};
+        EXPECT_EQ(expected, multiply(sample));
+
+        sample = {"*", "#t", "10"};
+        EXPECT_EQ(expected, multiply(sample));
+
+        sample = {"*", "#t", "#f"};
         EXPECT_EQ(expected, multiply(sample));
     }
 
@@ -183,6 +207,12 @@ namespace {
     TEST(OperationsTestEquality, EqualityInvalidOperand) {
         std::vector<std::string> sample = {"10", "#t", "10", "#t"};
         auto expected = "";
+        EXPECT_EQ(expected, equal(sample));
+
+        sample = {"#t", "10"};
+        EXPECT_EQ(expected, equal(sample));
+
+        sample = {"#t", "#f"};
         EXPECT_EQ(expected, equal(sample));
     }
 
