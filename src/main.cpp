@@ -90,7 +90,7 @@ std::string check_for_symbol(Env &expr, Interpreter &env) {
     Env first_mem = expr.get_member(0);
     std::string inp = first_mem.get_elem(0);
 
-    for (int i = 1; i < expr.get_full_size() - 2; i++) {
+    for (size_t i = 1; i < expr.get_full_size() - 2; i++) {
         inp = inp + expr.get_elem(i);
     }
 
@@ -220,7 +220,7 @@ Builder eval_if_more_expr(Env &expr, Interpreter &env) {
 
 std::string eval_begin(Env &expr, Interpreter &env) {
     std::string res;
-    for (int i = 1; i < expr.get_num_exprs(); i++) {
+    for (size_t i = 1; i < expr.get_num_exprs(); i++) {
         Env cur_mem = expr.get_member(i);
         res = (eval(cur_mem, env)).get_str();
     }
@@ -244,7 +244,7 @@ Builder eval_parantheses(Env &expr, Interpreter &env, int num_exprs) {
     std::vector<std::string> env_args;
     std::string cur_elem = (exprs.get_member(0)).get_elem(0);
 
-    for (int i = 1; i < exprs.get_num_exprs(); i++) {
+    for (size_t i = 1; i < exprs.get_num_exprs(); i++) {
         env_args.push_back((exprs.get_member(i)).get_elem(0));
     }
     
@@ -274,7 +274,7 @@ Builder eval_parantheses(Env &expr, Interpreter &env, int num_exprs) {
 std::string eval_proc(Procedure &proc, Env &args, Interpreter env) {
     Env arg_list = proc.get_proc_arg_list();
     Env proc_body = proc.get_proc_body();
-    for (int i = 0; i < args.get_num_exprs(); i++) {
+    for (size_t i = 0; i < args.get_num_exprs(); i++) {
         std::string cur_mem_elem = (arg_list.get_member(i)).get_elem(0);
         Env env_mem = args.get_member(i);
         std::string stt = (eval(env_mem, env)).get_str();

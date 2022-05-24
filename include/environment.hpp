@@ -14,7 +14,7 @@ class Env {
         Env();
         ~Env();
         void print_content_of_expr() const;
-        const void clear_content_of_expr();
+        void clear_content_of_expr();
         Env(std::string &expr);
         Env(std::vector<std::string> &expr);
         std::vector<std::string> get_env() const;

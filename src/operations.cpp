@@ -33,7 +33,7 @@ int invalid_logical_arg(const std::vector<std::string> &expr) {
 
 std::string print(std::vector<std::string> &expr) {
     std::string temp;
-    for (int i = 0; i < expr.size(); i++) {
+    for (size_t i = 0; i < expr.size(); i++) {
         std::cout << expr[i] << " ";
     }
     std::cout << std::endl;
@@ -383,6 +383,7 @@ std::string greater_than_or_equal(std::vector<std::string> &expr) {
 }
 
 std::string scheme_quit(std::vector<std::string> &expr) {
+    expr = {};
     std::string temp;
     exit(0);
 }

@@ -18,7 +18,7 @@ Procedure::Procedure(Env &expr) {
     temp.push_back("(");
     temp.push_back("begin");
     
-    for (int i = 2; i < expr.get_num_exprs(); i++) {
+    for (size_t i = 2; i < expr.get_num_exprs(); i++) {
         add_env(temp, expr.get_member(i));
     }
 
@@ -29,7 +29,7 @@ Procedure::Procedure(Env &expr) {
 
 void Procedure::add_env(std::vector<std::string>&expr, Env env) const {
     std::vector<std::string> temp = env.get_env();
-    for (int i = 0; i < temp.size(); i++) {
+    for (size_t i = 0; i < temp.size(); i++) {
         expr.push_back(temp[i]);
     }
 }

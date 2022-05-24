@@ -9,7 +9,7 @@ void Env::print_content_of_expr() const {
     std::cout << std::endl;
 }
 
-const void Env::clear_content_of_expr() {
+void Env::clear_content_of_expr() {
     env.clear();
 }
 
