@@ -28,9 +28,4 @@ namespace {
         expected = {"(", "(", "lambda", "(", "x", ")", "(", "+", "x", "x", ")", ")", "4", ")"};
         EXPECT_EQ(expected, parse_input(sample));
     }
-
-    int main(int argc, char** argv) {
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
 } 

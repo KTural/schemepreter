@@ -69,9 +69,4 @@ namespace {
         auto expected = "( square x ) ";
         EXPECT_EQ(expected, output);
     }
-
-    int main(int argc, char** argv) {
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
 }

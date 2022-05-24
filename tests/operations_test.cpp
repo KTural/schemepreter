@@ -467,9 +467,4 @@ namespace {
         sample = {">=", "10", ">=", "#t", "#f"};
         EXPECT_EQ(expected, greater_than_or_equal(sample));
     }
-
-    int main(int argc, char** argv) {
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
 } 
