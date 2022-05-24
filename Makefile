@@ -1,4 +1,4 @@
-CXX = g++ -std=c++17 -c
+CXX = g++ -std=c++17 -Wall -Wextra -c
 CXX_FLAGS = -lgtest -lgtest_main -lpthread 
 BUILD_OUTPUT = g++ -o
 OBJ = ./*.o
