@@ -308,7 +308,7 @@ Builder eval(Env &expr, Interpreter &env) {
         } else if (proc == "set!") {
             return eval_set(expr, env);
         } else if (proc == "quote") {
-            eval_quote(expr);
+            return eval_quote(expr);
         } else if (proc == "if") {
             if (expr.get_num_exprs() == 3) {
                 return eval_if(expr, env);
